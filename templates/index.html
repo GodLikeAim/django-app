@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Anasayfa{% endblock title %}
+{% block body %}
+    <!-- Header Section -->
+    <header class="bg-primary text-white text-center py-5">
+        <h1>Şirketimize Hoş Geldiniz</h1>
+        <p class="lead">İşletmenizin büyümesine yardımcı olmak için en iyi hizmetleri sunuyoruz</p>
+    </header>
+    <!-- Latest News Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Son Haberler</h2>
+            </div>
+            <div class="row">
+                {% for article in latest_articles %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="news-item">
+                        <a href="{% url 'blog:detail' article.id %}">
+                            <img src="{% if article.article_img %}
+                            {{ article.article_img.url }}
+                            {% else %}
+                                {% static 'images/image_news.jpg' %}
+                            {% endif %}" alt="{{ article.title }}">
+                        </a>
+                        <h5>{{article.title}}</h5>
+                        <p>{{article.content|safe|truncatewords:10}}
+                            <a href="{% url 'blog:detail' article.id %}">Read More</a>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="text-center">
+                    <a href="{% url 'blog:articles' %}" class="btn btn-outline-success btn-lg">Tüm Haberler</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section bg-light py-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hizmetlerimiz</h2>
+            </div>
+            <div class="row">
+                {% for service in services %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-item">
+                        <a href="#"></a>
+                            <img src="{% if service.service_img %}
+                            {{ service.service_img.url }}
+                            {% else %}
+                                {% static 'service_images/service_img.jpeg' %}
+                            {% endif %}" alt="{{ service.title }}">
+                        </a>
+                        <h4>{{ service.title }}</h4>
+                        <p>{{ service.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="text-center">
+                    <a href="{% url 'contact' %}" class="btn btn-outline-danger btn-lg">Daha Fazla Bilgi İçin İletişime Geçiniz!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock body %}

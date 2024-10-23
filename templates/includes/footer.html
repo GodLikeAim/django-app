@@ -1,0 +1,54 @@
+<!-- footer.html -->
+<footer class="bg-dark text-white py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- Logo ve Hakkımızda -->
+            <div class="col-md-4">
+                <h5>My Company</h5>
+                <p>{{ footer_settings.description }}</p>
+            </div>
+
+            <!-- Önemli Sayfalar -->
+            <div class="col-md-4">
+                <h5>Önemli Sayfalar</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white">Anasayfa</a></li>
+                    <li><a href="{% url 'about' %}" class="text-white">Hakkımızda</a></li>
+                    <li><a href="{% url 'blog:articles' %}" class="text-white">Blog</a></li>
+                    <li><a href="{% url 'contact' %}" class="text-white">İletişim</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'user:profile' request.user.username %}" class="text-white">Profilim</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!-- İletişim ve Sosyal Medya -->
+            <div class="col-md-4">
+                <h5>İletişim</h5>
+                <p>
+                    Adres: {{footer_settings.address}} <br>
+                    Email: <a href="mailto:{{footer_settings.email}}" class="text-white">{{footer_settings.email}}</a><br>
+                    Telefon: {{footer_settings.phone}}
+                </p>
+                <div>
+                    <h5>Bizi Sosyal Medyada Takip Edin:</h5>
+                    {% if footer_settings.facebook %}
+                    <a href="{{footer_settings.facebook}}" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                    {% endif %}
+                    {% if footer_settings.twitter %}
+                    <a href="{{footer_settings.twitter}}" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                    {% endif %}
+                    {% if footer_settings.instagram %}
+                    <a href="{{footer_settings.instagram}}" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    {% endif %}
+                    {% if footer_settings.linkedin %}
+                    <a href="{{footer_settings.instagram}}" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <p class="mb-0">&copy; 2024 My Company. Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+</footer>

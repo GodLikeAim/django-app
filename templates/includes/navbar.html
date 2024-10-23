@@ -1,0 +1,53 @@
+<!-- Navbar -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}">My Company</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            {% url 'index' as index_url %}
+            <a class="nav-link {% if request.path == index_url %}active{% endif %}" href="{{index_url}}">Anasayfa</a>
+          </li>
+          <li class="nav-item">
+            {% url 'about' as about_url %}
+            <a class="nav-link {% if request.path == about_url %}active{% endif %}" href="{{about_url}}">Hakkımızda</a>
+          </li>
+          <li class="nav-item">
+            {% url 'blog:articles' as blog_url %}
+            <a class="nav-link {% if request.path == blog_url %}active{% endif %}" href="{{blog_url}}">Blog</a>
+          </li>
+          <li class="nav-item">
+            {% url 'contact' as contact_url %}
+            <a class="nav-link {% if request.path == contact_url %}active{% endif %}" href="{{contact_url}}">İletişim</a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            {% url 'blog:dashboard' as blog_dashborad_url %}
+            <a class="nav-link {% if request.path == blog_dashborad_url %}active{% endif %}" href="{{blog_dashborad_url}}">Kontrol Panel</a>
+          </li>
+          <li class="nav-item">
+            {% url 'user:logout' as logout_url %}
+            <a class="nav-link {% if request.path == logout_url %}active{% endif %}" href="{{logout_url}}">Çıkış Yap</a>
+          </li>
+          <li class="nav-item">
+            {% url 'user:profile' request.user.username as profile_url %}
+            <a class="nav-link {% if request.path == profile_url %}active{% endif %}" href="{{profile_url}}">Profile</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            {% url 'user:register' as register_url %}
+            <a class="nav-link {% if request.path == register_url %}active{% endif %}" href="{{register_url}}">Kayıt Ol</a>
+          </li>
+          <li class="nav-item">
+            {% url 'user:login' as login_url %}
+            <a class="nav-link {% if request.path == login_url %}active{% endif %}" href="{{login_url}}">Giriş Yap</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

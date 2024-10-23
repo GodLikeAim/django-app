@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}Hakkımızda{% endblock title %}
+{% block body %}
+<div class="bg-light p-5 rounded">
+    <h3 class="display-5">Hakkımızda</h3>
+    <p class="lead">{{about.title}}</p>
+    <p>{{about.content|safe}}</p>
+</div>
+{% endblock body %}
